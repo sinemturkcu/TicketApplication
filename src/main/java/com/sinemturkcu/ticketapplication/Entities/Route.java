@@ -14,7 +14,10 @@ public class Route {
     private String departureCity;
     private String destinationCity;
 
+    /*
     @OneToMany
     private List<Vehicle> vehicles;
+     */
+
 
 }
