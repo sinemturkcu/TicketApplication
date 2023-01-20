@@ -15,7 +15,10 @@ public class Vehicle {
     private String serialNumber;
     private String vehicleCompany;
 
+    /*
     @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route;
+     */
+
 }
