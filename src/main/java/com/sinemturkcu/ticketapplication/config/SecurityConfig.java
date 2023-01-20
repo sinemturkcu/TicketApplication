@@ -49,6 +49,7 @@ public class SecurityConfig {
                     auth.antMatchers("/api/v1/announcements/**").permitAll();
                     auth.antMatchers("/api/v1/events/**").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/route/save").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/route/delete").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/v1/sponsors/**").permitAll();
                     auth.antMatchers("/api/v1/auth/user").hasAnyAuthority("ADMIN", "USER");
                     auth.anyRequest().authenticated();
