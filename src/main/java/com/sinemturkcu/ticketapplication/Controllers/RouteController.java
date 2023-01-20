@@ -20,4 +20,9 @@ public class RouteController {
     public Route save(@RequestBody Route route){
         return routeService.saveRoute(route);
     }
+
+    @DeleteMapping("/delete")
+    public void delete(@RequestParam Long id){
+        routeService.deleteRoute((id));
+    }
 }

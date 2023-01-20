@@ -20,4 +20,10 @@ public class RouteServiceImpl implements RouteService {
     public Route saveRoute(Route route) {
         return routeRepository.save(route);
     }
+
+    @Override
+    public void deleteRoute(Long id) {
+        Route route=routeRepository.getById(id);
+        routeRepository.delete(route);
+    }
 }

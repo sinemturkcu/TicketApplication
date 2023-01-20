@@ -6,5 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface RouteService {
     Route saveRoute(Route route);
+    void deleteRoute(Long id);
 
 }
