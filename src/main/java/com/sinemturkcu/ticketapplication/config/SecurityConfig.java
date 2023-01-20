@@ -43,16 +43,16 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeHttpRequests((auth) -> {
-//                    auth.antMatchers(HttpMethod.GET,"/api/v1/clubs/**").permitAll();
-                    //auth.antMatchers("/api/v1/clubs/**").permitAll();
-//                    auth.antMatchers(HttpMethod.GET,"/api/v1/announcements/**").hasAnyAuthority( "ADMIN","USER","CLUB_ADMIN");
-                    auth.antMatchers("/api/v1/announcements/**").permitAll();
-                    auth.antMatchers("/api/v1/events/**").hasAnyAuthority("ADMIN");
-                    auth.antMatchers("/api/route/save").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/route/delete").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/route/update").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/route/save").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/route/getAll").permitAll();
-                    auth.antMatchers("/api/v1/auth/user").hasAnyAuthority("ADMIN", "USER");
+                    auth.antMatchers("/api/vehicle/delete").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/vehicle/update").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/vehicle/save").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/vehicle/getAll").permitAll();
+
+                    auth.antMatchers("/api/auth/user").hasAnyAuthority("ADMIN", "USER");
                     auth.anyRequest().authenticated();
                 })
                 .formLogin().disable()
