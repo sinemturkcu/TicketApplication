@@ -1,7 +1,9 @@
 package com.sinemturkcu.ticketapplication.Entities;
 
-import jakarta.persistence.*;
+
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @Data
