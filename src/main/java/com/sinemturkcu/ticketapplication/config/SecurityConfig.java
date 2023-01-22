@@ -52,7 +52,7 @@ public class SecurityConfig {
                     auth.antMatchers("/api/vehicle/save").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/vehicle/getAll").permitAll();
                     auth.antMatchers("/api/ticket/getAll").permitAll();
-
+                    auth.antMatchers("/api/ticket/getByFilter").permitAll();
                     auth.antMatchers("/api/auth/user").hasAnyAuthority("ADMIN", "USER");
                     auth.anyRequest().authenticated();
                 })
