@@ -14,6 +14,8 @@ public class Vehicle {
     @Column(unique = true)
     private String serialNumber;
     private String vehicleCompany;
+    private String seatNumber;
+    private String restSeat;
 
     /*
     @ManyToOne
