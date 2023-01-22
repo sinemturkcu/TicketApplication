@@ -1,12 +1,10 @@
 package com.sinemturkcu.ticketapplication.Controllers;
 
+import com.sinemturkcu.ticketapplication.Entities.Route;
 import com.sinemturkcu.ticketapplication.Entities.Ticket;
 import com.sinemturkcu.ticketapplication.Services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,15 @@ public class TicketController {
     @GetMapping("/getAll")
     public List<Ticket> getAll(){
         return ticketService.getAll();
+    }
+
+    @DeleteMapping("/delete")
+    public void delete(@RequestParam Long id){
+        ticketService.deleteTicket(id);
+    }
+
+    @PostMapping("/save")
+    public Ticket save(@RequestBody Ticket ticket){
+        return ticketService.saveTicket(ticket);
     }
 }
