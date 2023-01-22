@@ -11,6 +11,8 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double price;
+    private String departureTime;
+    private String arrivalTime;
 
     @OneToOne
     Vehicle vehicle;
