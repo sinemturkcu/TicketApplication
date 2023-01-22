@@ -33,4 +33,9 @@ public class TicketController {
     public Ticket save(@RequestBody Ticket ticket){
         return ticketService.saveTicket(ticket);
     }
+
+    @GetMapping("/getByFilter")
+    public List<Ticket> findTicketsByDepartureCityAndDestinationCity(@RequestParam String departureCity, @RequestParam String destinationCity) {
+        return ticketService.findTicketsByDepartureCityAndDestinationCity(departureCity, destinationCity);
+    }
 }

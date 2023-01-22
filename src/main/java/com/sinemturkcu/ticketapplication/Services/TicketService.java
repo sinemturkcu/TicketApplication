@@ -12,4 +12,6 @@ public interface TicketService {
     void deleteTicket(Long id);
     Ticket updateTicket(Ticket ticket, Long id);
     List<Ticket> getAll();
+    List<Ticket> findTicketsByDepartureCityAndDestinationCity(String departureCity, String destinationCity);
+
 }

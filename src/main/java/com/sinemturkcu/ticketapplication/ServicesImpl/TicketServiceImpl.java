@@ -39,4 +39,11 @@ public class TicketServiceImpl implements TicketService {
     public List<Ticket> getAll() {
         return ticketRepository.findAll();
     }
+
+    @Override
+    public List<Ticket> findTicketsByDepartureCityAndDestinationCity(String departureCity, String destinationCity) {
+        return ticketRepository.findTicketsByDepartureCityAndDestinationCity(departureCity, destinationCity);
+    }
+
+
 }
