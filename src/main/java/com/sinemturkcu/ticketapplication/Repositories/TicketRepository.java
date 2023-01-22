@@ -11,7 +11,7 @@ import java.util.List;
 public interface TicketRepository extends JpaRepository<Ticket,Long> {
 
     @Query(value = "SELECT fm from Ticket fm " +
-            " where (:requestDepartureCity IS NULL OR fm.route.departureCity =: requestDepartureCity and :requestDestinationCity IS NULL OR fm.route.destinationCity =: requestDestinationCity) "
+            " where ((:requestDepartureCity IS NULL OR fm.route.departureCity =: requestDepartureCity) and (:requestDestinationCity IS NULL OR fm.route.destinationCity =: requestDestinationCity)) "
     )
     List<Ticket> findTicketsByDepartureCityAndDestinationCity(String requestDepartureCity, String requestDestinationCity);
 }
