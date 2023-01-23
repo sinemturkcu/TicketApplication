@@ -1,7 +1,9 @@
 package com.sinemturkcu.ticketapplication.Services;
 
-import com.sinemturkcu.ticketapplication.Entities.Role;
+import com.sinemturkcu.ticketapplication.Entities.Enums.Role;
+import com.sinemturkcu.ticketapplication.Entities.Ticket;
 import com.sinemturkcu.ticketapplication.Entities.User;
+import com.sinemturkcu.ticketapplication.Repositories.TicketRepository;
 import com.sinemturkcu.ticketapplication.Repositories.UserRepository;
 import com.sinemturkcu.ticketapplication.dto.UserDto;
 import com.sinemturkcu.ticketapplication.dto.UserDtoConverter;
@@ -20,7 +22,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
+    private final TicketRepository ticketRepository;
 
     public UserDto createUser(RegisterRequest registerRequest){
         User user = User.builder()
@@ -73,5 +75,7 @@ public class UserService {
         }
         return UserDtoConverter.convertToUserDto(userRepository.save(user));
     }
+
+
 }
 
