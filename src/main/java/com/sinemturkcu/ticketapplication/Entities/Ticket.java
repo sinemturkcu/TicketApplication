@@ -1,8 +1,11 @@
 package com.sinemturkcu.ticketapplication.Entities;
 
+import com.sinemturkcu.ticketapplication.Entities.Enums.TicketStatus;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -19,5 +22,9 @@ public class Ticket {
 
     @OneToOne
     Route route;
+
+
+
+
 
 }
