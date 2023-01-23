@@ -1,8 +1,11 @@
 package com.sinemturkcu.ticketapplication.Entities;
 
+import com.sinemturkcu.ticketapplication.Entities.Enums.Role;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,6 +26,7 @@ public class User extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
 
 
 }
