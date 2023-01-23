@@ -5,6 +5,7 @@ import com.sinemturkcu.ticketapplication.Entities.Ticket;
 import com.sinemturkcu.ticketapplication.Entities.User;
 import com.sinemturkcu.ticketapplication.Repositories.TicketRepository;
 import com.sinemturkcu.ticketapplication.Repositories.UserRepository;
+import com.sinemturkcu.ticketapplication.dto.UpdateUserDto;
 import com.sinemturkcu.ticketapplication.dto.UserDto;
 import com.sinemturkcu.ticketapplication.dto.UserDtoConverter;
 import com.sinemturkcu.ticketapplication.exception.GenericException;
@@ -23,6 +24,42 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TicketRepository ticketRepository;
+
+
+    // Admin can save user
+    public void saveUser(User user){
+        user.setPassword(passwordEncoder.encode((user.getPassword())));
+        if(user.getRole()==null){
+            user.setRole(Role.USER);
+        }
+        userRepository.save(user);
+    }
+
+    public String deleteUser(Long id) {
+        User user = userRepository.getById(id);
+        if (user == null) {
+            return "User not found";
+        }
+        userRepository.delete(user);
+        return "User deleted";
+    }
+    public String updateUser(UpdateUserDto updateUserDto) {
+        User user = userRepository.getById(updateUserDto.getId());
+        if (user == null) {
+            return "User not found";
+        }
+        user.setFirstName(updateUserDto.getFirstName());
+        user.setLastName(updateUserDto.getLastName());
+        user.setPhoneNumber(updateUserDto.getPhoneNumber());
+        user.setEmail(updateUserDto.getEmail());
+        user.setRole(updateUserDto.getRole());
+
+        userRepository.save(user);
+        return "User updated";
+    }
+
+
+
 
     public UserDto createUser(RegisterRequest registerRequest){
         User user = User.builder()
