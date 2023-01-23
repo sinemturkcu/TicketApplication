@@ -1,7 +1,7 @@
 package com.sinemturkcu.ticketapplication.dto;
 
 
-import com.sinemturkcu.ticketapplication.Entities.Role;
+import com.sinemturkcu.ticketapplication.Entities.Enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
