@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 @Data
 @Builder
@@ -19,6 +17,5 @@ public class UpdateUserDto {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+
 }
