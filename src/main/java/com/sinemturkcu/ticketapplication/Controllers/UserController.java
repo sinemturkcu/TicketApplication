@@ -7,6 +7,8 @@ import com.sinemturkcu.ticketapplication.responses.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/user")
@@ -33,6 +35,11 @@ public class UserController {
     public GenericResponse updateUser(@RequestBody UpdateUserDto updateUserDto) {
         userService.updateUser(updateUserDto);
         return new GenericResponse("User updated successfully");
+    }
+
+    @GetMapping("/getAll")
+    public List<User> getAll(){
+       return userService.getAllUsers();
     }
 
 }
