@@ -32,9 +32,15 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public String buyTicket(Booking booking) {
+        booking.setTicketStatus(TicketStatus.TICKET_STATUS_PURCHASED);
+        bookingRepository.save(booking);
+        return "Ticket bought";
+    }
 
-       booking.setTicketStatus(TicketStatus.TICKET_STATUS_PURCHASED);
-       bookingRepository.save(booking);
-       return "Ticket bought";
+    @Override
+    public String reservation(Booking booking) {
+        booking.setTicketStatus(TicketStatus.TICKET_STATUS_REZERVATION);
+        bookingRepository.save(booking);
+        return "Ticket reservation is successfull";
     }
 }

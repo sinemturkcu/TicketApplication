@@ -30,4 +30,8 @@ public class BookingController {
         return bookingService.buyTicket(booking);
     }
 
+    @PostMapping("/reservation")
+    public String reservation(@RequestBody Booking booking){
+        return bookingService.reservation(booking);
+    }
 }
