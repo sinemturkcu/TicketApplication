@@ -3,6 +3,7 @@ package com.sinemturkcu.ticketapplication.Controllers;
 import com.sinemturkcu.ticketapplication.Entities.User;
 import com.sinemturkcu.ticketapplication.Services.UserService;
 import com.sinemturkcu.ticketapplication.dto.UpdateUserDto;
+import com.sinemturkcu.ticketapplication.dto.UserListDto;
 import com.sinemturkcu.ticketapplication.responses.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-    public List<User> getAll(){
+    public List<UserListDto> getAll(){
        return userService.getAllUsers();
     }
 

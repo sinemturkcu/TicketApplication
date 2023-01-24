@@ -8,6 +8,7 @@ import com.sinemturkcu.ticketapplication.Repositories.UserRepository;
 import com.sinemturkcu.ticketapplication.dto.UpdateUserDto;
 import com.sinemturkcu.ticketapplication.dto.UserDto;
 import com.sinemturkcu.ticketapplication.dto.UserDtoConverter;
+import com.sinemturkcu.ticketapplication.dto.UserListDto;
 import com.sinemturkcu.ticketapplication.exception.GenericException;
 import com.sinemturkcu.ticketapplication.requests.RegisterRequest;
 import com.sinemturkcu.ticketapplication.requests.UpdateUserRoleRequest;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +45,7 @@ public class UserService {
         userRepository.delete(user);
         return "User deleted";
     }
+
     public String updateUser(UpdateUserDto updateUserDto) {
         User user = userRepository.getById(updateUserDto.getId());
         if (user == null) {
@@ -57,9 +60,6 @@ public class UserService {
         userRepository.save(user);
         return "User updated";
     }
-
-
-
 
     public UserDto createUser(RegisterRequest registerRequest){
         User user = User.builder()
@@ -93,8 +93,14 @@ public class UserService {
                         .build());
     }
 
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
+    public List<UserListDto> getAllUsers(){
+        List<User> users=userRepository.findAll();
+        final Stream<UserListDto> listVMStream  = users.stream().map(UserListDto::new);
+        return listVMStream.collect(java.util.stream.Collectors.toList());
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public UserDto updateUserRole(UpdateUserRoleRequest request){
