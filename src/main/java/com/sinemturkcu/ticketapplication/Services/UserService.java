@@ -46,21 +46,6 @@ public class UserService {
         return "User deleted";
     }
 
-    public String updateUser(UpdateUserDto updateUserDto) {
-        User user = userRepository.getById(updateUserDto.getId());
-        if (user == null) {
-            return "User not found";
-        }
-        user.setFirstName(updateUserDto.getFirstName());
-        user.setLastName(updateUserDto.getLastName());
-        user.setPhoneNumber(updateUserDto.getPhoneNumber());
-        user.setEmail(updateUserDto.getEmail());
-        user.setRole(updateUserDto.getRole());
-
-        userRepository.save(user);
-        return "User updated";
-    }
-
     public UserDto createUser(RegisterRequest registerRequest){
         User user = User.builder()
                 .username(registerRequest.getUsername())
@@ -105,6 +90,24 @@ public class UserService {
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public User getUserByEmail (String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public String updateUser(UpdateUserDto updateUserDto) {
+        User user = userRepository.findByEmail(updateUserDto.getEmail());
+        if (user == null) {
+            return "User not found";
+        }
+        user.setFirstName(updateUserDto.getFirstName());
+        user.setLastName(updateUserDto.getLastName());
+        user.setPhoneNumber(updateUserDto.getPhoneNumber());
+
+
+        userRepository.save(user);
+        return "User updated";
     }
 
     public UserDto updateUserRole(UpdateUserRoleRequest request){
