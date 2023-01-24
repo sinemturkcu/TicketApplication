@@ -38,13 +38,18 @@ public class UserController {
         return new GenericResponse("User updated successfully");
     }
 
+    @GetMapping("/getUserByEmail")
+    public User getUserByEmail(@RequestParam String email) {
+        return userService.getUserByEmail(email);
+    }
+
     @GetMapping("/getAll")
     public List<UserListDto> getAll(){
        return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
+    @GetMapping("/getUser")
+    public User getUser(@RequestParam Long id) {
         return userService.getUser(id);
     }
 

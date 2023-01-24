@@ -104,8 +104,6 @@ public class UserService {
         user.setFirstName(updateUserDto.getFirstName());
         user.setLastName(updateUserDto.getLastName());
         user.setPhoneNumber(updateUserDto.getPhoneNumber());
-
-
         userRepository.save(user);
         return "User updated";
     }
