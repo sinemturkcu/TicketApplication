@@ -32,7 +32,7 @@ public class UserController {
         return new GenericResponse("User deleted successfully");
     }
 
-    @PutMapping("/updateuser")
+    @PutMapping("/updateUser")
     public GenericResponse updateUser(@RequestBody UpdateUserDto updateUserDto) {
         userService.updateUser(updateUserDto);
         return new GenericResponse("User updated successfully");
