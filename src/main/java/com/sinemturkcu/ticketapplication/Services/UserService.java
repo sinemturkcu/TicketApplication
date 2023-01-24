@@ -99,6 +99,10 @@ public class UserService {
         return listVMStream.collect(java.util.stream.Collectors.toList());
     }
 
+    public User getUser(Long id){
+        return userRepository.findById(id).orElse(null);
+    }
+
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
