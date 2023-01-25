@@ -2,7 +2,9 @@ package com.sinemturkcu.ticketapplication.Controllers;
 
 import com.sinemturkcu.ticketapplication.Entities.Vehicle;
 import com.sinemturkcu.ticketapplication.Services.VehicleService;
+import com.sinemturkcu.ticketapplication.dto.VehicleDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +21,8 @@ public class VehicleController {
     }
 
     @PostMapping("/save")
-    public Vehicle saveVehicle(@RequestBody Vehicle vehicle){
-        return vehicleService.saveVehicle(vehicle);
+    public ResponseEntity<Vehicle> saveVehicle(@RequestBody Vehicle vehicle){
+        return ResponseEntity.ok(vehicleService.saveVehicle(vehicle));
     }
 
     @GetMapping("/getAll")
@@ -29,8 +31,18 @@ public class VehicleController {
     }
 
     @DeleteMapping("/delete")
-    public void deleteVehicle(@RequestParam Long id){
-        vehicleService.deleteVehicle(id);
+    public ResponseEntity<String> deleteVehicle(@RequestParam Long id){
+        return ResponseEntity.ok(vehicleService.deleteVehicle(id));
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<String> updateVehicle(@RequestBody Vehicle vehicle, @RequestParam Long id) {
+        return ResponseEntity.ok(vehicleService.updateVehicle(vehicle, id));
+    }
+
+    @PostMapping("/getVehicle")
+    public ResponseEntity<List<Vehicle>> getByDepartureAndDirections(@RequestBody VehicleDto vehicleDto) {
+        return ResponseEntity.ok(vehicleService.getByDirectionsAndDepartureTime(vehicleDto));
     }
 
 }

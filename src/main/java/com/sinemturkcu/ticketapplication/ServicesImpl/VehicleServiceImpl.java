@@ -1,12 +1,11 @@
 package com.sinemturkcu.ticketapplication.ServicesImpl;
 
-import com.sinemturkcu.ticketapplication.Entities.Enums.ErrorCode;
 import com.sinemturkcu.ticketapplication.Entities.Vehicle;
+import com.sinemturkcu.ticketapplication.Repositories.TicketRepository;
 import com.sinemturkcu.ticketapplication.Repositories.VehicleRepository;
 import com.sinemturkcu.ticketapplication.Services.VehicleService;
-import com.sinemturkcu.ticketapplication.exception.GenericException;
+import com.sinemturkcu.ticketapplication.dto.VehicleDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +14,11 @@ import java.util.List;
 public class VehicleServiceImpl implements VehicleService {
 
     VehicleRepository vehicleRepository;
-
+     TicketRepository ticketRepository;
     @Autowired
-    public VehicleServiceImpl(VehicleRepository vehicleRepository) {
+    public VehicleServiceImpl(VehicleRepository vehicleRepository, TicketRepository ticketRepository) {
         this.vehicleRepository = vehicleRepository;
+        this.ticketRepository = ticketRepository;
     }
 
 
@@ -28,9 +28,10 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public void deleteVehicle(Long id) {
+    public String deleteVehicle(Long id) {
         Vehicle vehicle=vehicleRepository.getById(id);
         vehicleRepository.delete(vehicle);
+        return "Bus deleted successfully";
 
     }
 
@@ -38,4 +39,29 @@ public class VehicleServiceImpl implements VehicleService {
     public List<Vehicle> getAll() {
         return vehicleRepository.findAll();
     }
+
+    @Override
+    public String updateVehicle(Vehicle vehicle,Long id) {
+        Vehicle vehicle1 = vehicleRepository.findById(id).orElse(null);
+        if (vehicle1 != null) {
+            ticketRepository.deleteAllByVehicleId(id);
+            vehicle1.setDepartureTime(vehicle.getDepartureTime());
+            vehicle1.setDepartureCity(vehicle.getDepartureCity());
+            vehicle1.setDestinationCity(vehicle.getDestinationCity());
+            vehicleRepository.save(vehicle1);
+            return "Vehicle updated successfully";
+        }
+        return "Vehicle not found";
+    }
+
+    @Override
+    public Vehicle getById(Long id) {
+        return vehicleRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Vehicle> getByDirectionsAndDepartureTime(VehicleDto vehicleDto) {
+        return vehicleRepository.findVehicleByDepartureCityAndDestinationCityAndDepartureTime(vehicleDto.getDepartureCity(),vehicleDto.getDestinationCity(),vehicleDto.getDepartureTime());
+    }
+
 }
