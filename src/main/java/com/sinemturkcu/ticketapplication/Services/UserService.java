@@ -1,9 +1,7 @@
 package com.sinemturkcu.ticketapplication.Services;
 
 import com.sinemturkcu.ticketapplication.Entities.Enums.Role;
-import com.sinemturkcu.ticketapplication.Entities.Ticket;
 import com.sinemturkcu.ticketapplication.Entities.User;
-import com.sinemturkcu.ticketapplication.Repositories.TicketRepository;
 import com.sinemturkcu.ticketapplication.Repositories.UserRepository;
 import com.sinemturkcu.ticketapplication.dto.UpdateUserDto;
 import com.sinemturkcu.ticketapplication.dto.UserDto;
@@ -25,8 +23,6 @@ import java.util.stream.Stream;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final TicketRepository ticketRepository;
-
 
     // Admin can save user
     public void saveUser(User user){

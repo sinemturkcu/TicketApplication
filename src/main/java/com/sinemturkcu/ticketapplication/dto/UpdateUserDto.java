@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateUserDto {
-    private Long id;
     private String email;
     private String firstName;
     private String lastName;
