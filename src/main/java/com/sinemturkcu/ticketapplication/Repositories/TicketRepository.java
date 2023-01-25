@@ -1,17 +1,25 @@
 package com.sinemturkcu.ticketapplication.Repositories;
 
 import com.sinemturkcu.ticketapplication.Entities.Ticket;
+import com.sinemturkcu.ticketapplication.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket,Long> {
+public interface TicketRepository extends JpaRepository<Ticket,String> ,JpaSpecificationExecutor<Ticket> {
+    List<Ticket> getAllByVehicleIdOrderByTicketSeat(Long busId);
 
-    @Query(value = "SELECT fm from Ticket fm " +
-            " where ((:requestDepartureCity IS NULL OR fm.route.departureCity =: requestDepartureCity) and (:requestDestinationCity IS NULL OR fm.route.destinationCity =: requestDestinationCity) and ( fm.vehicle.restSeat>0 )) "
-    )
-    List<Ticket> findTicketsByDepartureCityAndDestinationCity(String requestDepartureCity, String requestDestinationCity);
+
+    List<Ticket> findByUser(User user);
+
+    List<Ticket> findByUserAndFromDirection(User user, String fromDirection);
+
+    void deleteAllByVehicleId(Long busId);
+
+
+
 }
