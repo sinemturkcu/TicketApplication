@@ -43,7 +43,7 @@ public class VehicleController {
         return ResponseEntity.ok(vehicleService.updateVehicle(vehicle, id));
     }
 
-    @GetMapping("/getVehicle")
+    @GetMapping("/getVehicle/")
     public ResponseEntity<List<Vehicle>> getByDepartureAndDirections(@RequestParam String departureCity, @RequestParam String destinationCity) {
         return ResponseEntity.ok(vehicleService.getByDirectionsAndDepartureTime(departureCity,destinationCity));
     }

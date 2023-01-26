@@ -26,7 +26,7 @@ public class UserController {
         userService.saveUser(user);
         return new GenericResponse("User created successfully");
     }
-    @DeleteMapping("/deleteUser")
+    @DeleteMapping("/deleteUser/")
     public GenericResponse delete(@RequestParam Long id){
         userService.deleteUser(id);
         return new GenericResponse("User deleted successfully");
