@@ -43,27 +43,26 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeHttpRequests((auth) -> {
+                    /*
+
+                     */
+                    auth.antMatchers("/api/user/getAll").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/vehicle/getVehicle/**").permitAll();
+                    auth.antMatchers("/api/user/saveUser").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/vehicle/saveVehicle").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/vehicle/getAll").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/ticket/getNotNullTickets").permitAll();
+                    auth.antMatchers("/api/user/deleteUser/**").permitAll();
                     auth.antMatchers("/api/user/getUser/{id}").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/user/getUserByEmail/").hasAnyAuthority("ADMIN");
-                    auth.antMatchers("/api/user/getAll").hasAnyAuthority("ADMIN");
-                    auth.antMatchers("/api/user/saveUser").hasAnyAuthority("ADMIN");
-                    auth.antMatchers("/api/user/updateUser").hasAnyAuthority("ADMIN","USER");
-                    auth.antMatchers("/api/user/deleteUser").hasAnyAuthority("ADMIN");
-
-                    auth.antMatchers("/api/route/delete").hasAnyAuthority("ADMIN");
-                    auth.antMatchers("/api/route/delete").hasAnyAuthority("ADMIN");
-                    auth.antMatchers("/api/route/delete").hasAnyAuthority("ADMIN");
-                    auth.antMatchers("/api/route/delete").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/user/updateUser").hasAnyAuthority("ADMIN","USER");auth.antMatchers("/api/route/delete").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/route/update").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/route/save").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/route/getAll").permitAll();
-
-                    auth.antMatchers("/api/vehicle/delete").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/vehicle/delete/**").permitAll();
                     auth.antMatchers("/api/vehicle/update").hasAnyAuthority("ADMIN");
-                    auth.antMatchers("/api/vehicle/save").hasAnyAuthority("ADMIN");
-                    auth.antMatchers("/api/vehicle/getAll").permitAll();
-                    auth.antMatchers("/api/vehicle/getVehicle").permitAll();
-
+                    auth.antMatchers("/api/vehicle/getVehicle").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/ticket/getByEmail").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/ticket/getAll").permitAll();
                     auth.antMatchers("/api/ticket/buy").hasAnyAuthority("ADMIN","USER");
                     auth.antMatchers("/api/ticket/cancel/{id}").hasAnyAuthority("ADMIN","USER");
