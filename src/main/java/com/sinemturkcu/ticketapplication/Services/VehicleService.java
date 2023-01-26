@@ -18,5 +18,5 @@ public interface VehicleService {
 
     Vehicle getById(Long id);
 
-    public List<Vehicle> getByDirectionsAndDepartureTime(VehicleDto vehicleDto);
+    List<Vehicle> getByDirectionsAndDepartureTime(String departureCity, String destinationCity);
 }

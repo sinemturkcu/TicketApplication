@@ -60,8 +60,8 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public List<Vehicle> getByDirectionsAndDepartureTime(VehicleDto vehicleDto) {
-        return vehicleRepository.findVehicleByDepartureCityAndDestinationCityAndDepartureTime(vehicleDto.getDepartureCity(),vehicleDto.getDestinationCity(),vehicleDto.getDepartureTime());
+    public List<Vehicle> getByDirectionsAndDepartureTime(String departureCity, String destinationCity) {
+        return vehicleRepository.findVehicleByDepartureCityAndDestinationCity(departureCity,destinationCity);
     }
 
 }

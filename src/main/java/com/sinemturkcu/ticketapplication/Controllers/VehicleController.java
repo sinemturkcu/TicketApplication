@@ -1,8 +1,10 @@
 package com.sinemturkcu.ticketapplication.Controllers;
 
+import com.sinemturkcu.ticketapplication.Entities.User;
 import com.sinemturkcu.ticketapplication.Entities.Vehicle;
 import com.sinemturkcu.ticketapplication.Services.VehicleService;
 import com.sinemturkcu.ticketapplication.dto.VehicleDto;
+import com.sinemturkcu.ticketapplication.responses.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +22,10 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<Vehicle> saveVehicle(@RequestBody Vehicle vehicle){
-        return ResponseEntity.ok(vehicleService.saveVehicle(vehicle));
+    @PostMapping("/saveVehicle")
+    public GenericResponse saveVehicle(@RequestBody Vehicle vehicle){
+        vehicleService.saveVehicle(vehicle);
+        return new GenericResponse("Vehicle created successfully");
     }
 
     @GetMapping("/getAll")
@@ -30,7 +33,7 @@ public class VehicleController {
         return vehicleService.getAll();
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/")
     public ResponseEntity<String> deleteVehicle(@RequestParam Long id){
         return ResponseEntity.ok(vehicleService.deleteVehicle(id));
     }
@@ -40,9 +43,9 @@ public class VehicleController {
         return ResponseEntity.ok(vehicleService.updateVehicle(vehicle, id));
     }
 
-    @PostMapping("/getVehicle")
-    public ResponseEntity<List<Vehicle>> getByDepartureAndDirections(@RequestBody VehicleDto vehicleDto) {
-        return ResponseEntity.ok(vehicleService.getByDirectionsAndDepartureTime(vehicleDto));
+    @GetMapping("/getVehicle")
+    public ResponseEntity<List<Vehicle>> getByDepartureAndDirections(@RequestParam String departureCity, @RequestParam String destinationCity) {
+        return ResponseEntity.ok(vehicleService.getByDirectionsAndDepartureTime(departureCity,destinationCity));
     }
 
 }

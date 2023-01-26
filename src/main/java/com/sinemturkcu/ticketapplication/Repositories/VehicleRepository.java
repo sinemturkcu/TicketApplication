@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle,Long> {
-    List<Vehicle> findVehicleByDepartureCityAndDestinationCityAndDepartureTime(String departureCity, String destinationCity, String departureTime);
+    List<Vehicle> findVehicleByDepartureCityAndDestinationCity(String departureCity, String destinationCity);
 }
