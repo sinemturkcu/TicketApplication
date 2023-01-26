@@ -63,8 +63,8 @@ public class TicketController {
         return ResponseEntity.ok(ticketService.getTicketByUserEmail(email));
     }
     @GetMapping("/getNotNullTickets")
-    public ResponseEntity<List<Ticket> > getAllByUserIsNotNull() {
-        return ResponseEntity.ok(ticketService.getAllByUserIsNotNull());
+    public ResponseEntity<List<Ticket>> getAllByUserIsNotNull() {
+        return ResponseEntity.ok(ticketService.getTicketsByUserNotNull());
 
     }
     /*

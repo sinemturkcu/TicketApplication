@@ -15,7 +15,7 @@ public interface TicketRepository extends JpaRepository<Ticket,String> ,JpaSpeci
     List<Ticket> findByUser(User user);
     List<Ticket> findByUserAndFromDirection(User user, String fromDirection);
     void deleteAllByVehicleId(Long busId);
-    List<Ticket> getAllByUserIsNotNull();
+    List<Ticket> getTicketsByUserNotNull();
 
 
 

@@ -144,8 +144,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> getAllByUserIsNotNull() {
-        return ticketRepository.getAllByUserIsNotNull();
+    public List<Ticket> getTicketsByUserNotNull() {
+        return ticketRepository.getTicketsByUserNotNull();
     }
 
 }

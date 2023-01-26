@@ -20,5 +20,5 @@ public interface TicketService {
     String cancelTicket(final String ticketId);
     String delayTicket(final TicketDelayDto ticketDelay);
     List<Ticket> getTicketByUserIdAndFromDirections(final UserEmailDto userEmail);
-    List<Ticket> getAllByUserIsNotNull();
+    List<Ticket> getTicketsByUserNotNull();
 }
