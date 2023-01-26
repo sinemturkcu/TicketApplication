@@ -57,6 +57,16 @@ public class TicketController {
     public ResponseEntity<List<Ticket>> getTicketByUserIdAndFromDirections(@RequestBody UserEmailDto userEmail) {
         return ResponseEntity.ok(ticketService.getTicketByUserIdAndFromDirections(userEmail));
     }
+
+    @GetMapping("/getByEmail")
+    public ResponseEntity<List<Ticket>> getTicketByUserEmail(@RequestParam String email){
+        return ResponseEntity.ok(ticketService.getTicketByUserEmail(email));
+    }
+    @GetMapping("/getNotNullTickets")
+    public ResponseEntity<List<Ticket> > getAllByUserIsNotNull() {
+        return ResponseEntity.ok(ticketService.getAllByUserIsNotNull());
+
+    }
     /*
      @GetMapping("/getByFilter")
     public List<Ticket> findTicketsByDepartureCityAndDestinationCity(@RequestParam String departureCity, @RequestParam String destinationCity) {

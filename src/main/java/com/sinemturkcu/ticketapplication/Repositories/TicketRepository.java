@@ -12,13 +12,10 @@ import java.util.List;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket,String> ,JpaSpecificationExecutor<Ticket> {
     List<Ticket> getAllByVehicleIdOrderByTicketSeat(Long busId);
-
-
     List<Ticket> findByUser(User user);
-
     List<Ticket> findByUserAndFromDirection(User user, String fromDirection);
-
     void deleteAllByVehicleId(Long busId);
+    List<Ticket> getAllByUserIsNotNull();
 
 
 

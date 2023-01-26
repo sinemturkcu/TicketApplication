@@ -143,4 +143,9 @@ public class TicketServiceImpl implements TicketService {
         return byUserAndFromDirection;
     }
 
+    @Override
+    public List<Ticket> getAllByUserIsNotNull() {
+        return ticketRepository.getAllByUserIsNotNull();
+    }
+
 }
