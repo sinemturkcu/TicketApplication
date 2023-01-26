@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 
 @Data
 public class UserListDto {
+    private Long id;
     private String userName;
     private String firstName;
     private String lastName;
@@ -18,6 +19,7 @@ public class UserListDto {
     private Role role;
 
     public UserListDto(User user) {
+        this.id=user.getId();
         this.userName = user.getUsername();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
