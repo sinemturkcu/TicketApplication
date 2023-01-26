@@ -2,6 +2,7 @@ package com.sinemturkcu.ticketapplication.Repositories;
 
 import com.sinemturkcu.ticketapplication.Entities.Ticket;
 import com.sinemturkcu.ticketapplication.Entities.User;
+import com.sinemturkcu.ticketapplication.dto.BuyTicketDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -16,6 +17,8 @@ public interface TicketRepository extends JpaRepository<Ticket,String> ,JpaSpeci
     List<Ticket> findByUserAndFromDirection(User user, String fromDirection);
     void deleteAllByVehicleId(Long busId);
     List<Ticket> getTicketsByUserNotNull();
+    List<Ticket> getTicketsByUserNull();
+
 
 
 
