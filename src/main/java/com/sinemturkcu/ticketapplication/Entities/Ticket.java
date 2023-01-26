@@ -24,7 +24,7 @@ public class Ticket {
     @Column(name = "ticket_number")
     private int ticketNumber;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
