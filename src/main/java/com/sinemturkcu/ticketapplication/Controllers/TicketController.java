@@ -65,8 +65,13 @@ public class TicketController {
     @GetMapping("/getNotNullTickets")
     public ResponseEntity<List<Ticket>> getAllByUserIsNotNull() {
         return ResponseEntity.ok(ticketService.getTicketsByUserNotNull());
-
     }
+
+    @GetMapping("/filterByStatus")
+    public List<Ticket> filterByDate(@RequestParam  String requestDate) {
+        return ticketService.filterByDate(requestDate);
+    }
+
     /*
      @GetMapping("/getByFilter")
     public List<Ticket> findTicketsByDepartureCityAndDestinationCity(@RequestParam String departureCity, @RequestParam String destinationCity) {

@@ -148,4 +148,9 @@ public class TicketServiceImpl implements TicketService {
         return ticketRepository.getTicketsByUserNotNull();
     }
 
+    @Override
+    public List<Ticket> filterByDate(String requestDate) {
+        return ticketRepository.filterByDate(requestDate);
+    }
+
 }

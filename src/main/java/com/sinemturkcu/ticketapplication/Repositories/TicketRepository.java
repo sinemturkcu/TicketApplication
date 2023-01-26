@@ -6,6 +6,7 @@ import com.sinemturkcu.ticketapplication.dto.BuyTicketDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,7 +20,10 @@ public interface TicketRepository extends JpaRepository<Ticket,String> ,JpaSpeci
     List<Ticket> getTicketsByUserNotNull();
     List<Ticket> getTicketsByUserNull();
 
-
+    @Query(value = "SELECT t from Ticket t " +
+            " where (:requestDate IS NULL OR t.ticketDate =: requestDate) "
+    )
+    List<Ticket> filterByDate(String requestDate);
 
 
 }

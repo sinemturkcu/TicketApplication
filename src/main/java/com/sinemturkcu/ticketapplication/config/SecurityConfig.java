@@ -67,6 +67,7 @@ public class SecurityConfig {
                     auth.antMatchers("/api/ticket/buy").hasAnyAuthority("ADMIN","USER");
                     auth.antMatchers("/api/ticket/cancel/{id}").hasAnyAuthority("ADMIN","USER");
                     auth.antMatchers("/api/ticket/delay").hasAnyAuthority("ADMIN","USER");
+                    auth.antMatchers("/api/ticket/filterByStatus").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/ticket/save/{id}").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/auth/user").hasAnyAuthority("ADMIN", "USER");
                     auth.anyRequest().authenticated();
