@@ -2,6 +2,7 @@ package com.sinemturkcu.ticketapplication.Controllers;
 
 import com.sinemturkcu.ticketapplication.Entities.Route;
 import com.sinemturkcu.ticketapplication.Services.RouteService;
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("/api/route")
+@ApiModel(value = "Ticket api documentation", description = "Model")
 public class RouteController {
     RouteService routeService;
 
