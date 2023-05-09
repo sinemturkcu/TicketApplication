@@ -55,7 +55,8 @@ public class SecurityConfig {
                     auth.antMatchers("/api/user/deleteUser/**").permitAll();
                     auth.antMatchers("/api/user/getUser/{id}").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/user/getUserByEmail/").hasAnyAuthority("ADMIN");
-                    auth.antMatchers("/api/user/updateUser").hasAnyAuthority("ADMIN","USER");auth.antMatchers("/api/route/delete").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/api/user/updateUser").hasAnyAuthority("ADMIN","USER");
+                    auth.antMatchers("/api/route/delete").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/route/update").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/route/save").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/route/getAll").permitAll();
@@ -70,6 +71,7 @@ public class SecurityConfig {
                     auth.antMatchers("/api/ticket/filterByStatus").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/ticket/save/{id}").hasAnyAuthority("ADMIN");
                     auth.antMatchers("/api/auth/user").hasAnyAuthority("ADMIN", "USER");
+                    auth.antMatchers("/v2/api-docs").hasAnyAuthority("ADMIN","USER");
                     auth.anyRequest().authenticated();
                 })
                 .formLogin().disable()
@@ -83,7 +85,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
-        return (web -> web.ignoring().antMatchers("/api/auth/login", "/api/auth/register"));
+        return (web -> web.ignoring().antMatchers("/api/auth/login", "/api/auth/register","/v2/api-docs"));
     }
 
     @Bean
