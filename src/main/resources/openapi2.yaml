@@ -1,0 +1,997 @@
+swagger: '2.0'
+info:
+  description: User Api Documentation
+  version: 1.12.3
+  title: Ticket Application
+  contact:
+    name: Sinem Türkçü
+    email: sinemturkcu@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: localhost:8082
+basePath: /
+tags:
+  - name: auth-controller
+    description: Auth Controller
+  - name: route-controller
+    description: Route Controller
+  - name: ticket-controller
+    description: Ticket Controller
+  - name: user-controller
+    description: User Controller
+  - name: vehicle-controller
+    description: Vehicle Controller
+paths:
+  /api/auth/login:
+    post:
+      tags:
+        - auth-controller
+      summary: login
+      operationId: loginUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: loginRequest
+          description: loginRequest
+          required: true
+          schema:
+            $ref: '#/definitions/LoginRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TokenResponseDto'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/auth/register:
+    post:
+      tags:
+        - auth-controller
+      summary: register
+      operationId: registerUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: registerRequest
+          description: registerRequest
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UserDto'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/route/delete:
+    delete:
+      tags:
+        - route-controller
+      summary: delete
+      operationId: deleteUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: query
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /api/route/getAll:
+    get:
+      tags:
+        - route-controller
+      summary: getAll
+      operationId: getAllUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Route'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/route/save:
+    post:
+      tags:
+        - route-controller
+      summary: save
+      operationId: saveUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: route
+          description: route
+          required: true
+          schema:
+            $ref: '#/definitions/Route'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Route'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/route/update/{id}:
+    put:
+      tags:
+        - route-controller
+      summary: update
+      operationId: updateUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: route
+          description: route
+          required: true
+          schema:
+            $ref: '#/definitions/Route'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Route'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/ticket/buy:
+    post:
+      tags:
+        - ticket-controller
+      summary: buyTicket
+      operationId: buyTicketUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: buyTicketVM
+          description: buyTicketVM
+          required: true
+          schema:
+            $ref: '#/definitions/BuyTicketDto'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/ticket/cancel:
+    post:
+      tags:
+        - ticket-controller
+      summary: cancelTicket
+      operationId: cancelTicketUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: ticketId
+          in: query
+          description: ticketId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/ticket/delay:
+    post:
+      tags:
+        - ticket-controller
+      summary: delayTicket
+      operationId: delayTicketUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: ticketDelay
+          description: ticketDelay
+          required: true
+          schema:
+            $ref: '#/definitions/TicketDelayDto'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/ticket/delete:
+    delete:
+      tags:
+        - ticket-controller
+      summary: delete
+      operationId: deleteUsingDELETE_1
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: query
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /api/ticket/filterByStatus:
+    get:
+      tags:
+        - ticket-controller
+      summary: filterByDate
+      operationId: filterByDateUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: requestDate
+          in: query
+          description: requestDate
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Ticket'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/ticket/getAll:
+    get:
+      tags:
+        - ticket-controller
+      summary: getAll
+      operationId: getAllUsingGET_1
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Ticket'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/ticket/getByEmail:
+    get:
+      tags:
+        - ticket-controller
+      summary: getTicketByUserEmail
+      operationId: getTicketByUserEmailUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: email
+          in: query
+          description: email
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Ticket'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/ticket/getNotNullTickets:
+    get:
+      tags:
+        - ticket-controller
+      summary: getAllByUserIsNotNull
+      operationId: getAllByUserIsNotNullUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Ticket'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/ticket/save:
+    post:
+      tags:
+        - ticket-controller
+      summary: save
+      operationId: saveUsingPOST_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: query
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/ticket/useridandfromdirections:
+    post:
+      tags:
+        - ticket-controller
+      summary: getTicketByUserIdAndFromDirections
+      operationId: getTicketByUserIdAndFromDirectionsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: userEmail
+          description: userEmail
+          required: true
+          schema:
+            $ref: '#/definitions/UserEmailDto'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Ticket'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/user/deleteUser/:
+    delete:
+      tags:
+        - user-controller
+      summary: delete
+      operationId: deleteUsingDELETE_2
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: query
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /api/user/getAll:
+    get:
+      tags:
+        - user-controller
+      summary: getAll
+      operationId: getAllUsingGET_2
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserListDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/user/getUser:
+    get:
+      tags:
+        - user-controller
+      summary: getUser
+      operationId: getUserUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: query
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/user/getUserByEmail:
+    get:
+      tags:
+        - user-controller
+      summary: getUserByEmail
+      operationId: getUserByEmailUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: email
+          in: query
+          description: email
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/user/saveUser:
+    post:
+      tags:
+        - user-controller
+      summary: saveUser
+      operationId: saveUserUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: user
+          description: user
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/user/updateUser:
+    put:
+      tags:
+        - user-controller
+      summary: updateUser
+      operationId: updateUserUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: updateUserDto
+          description: updateUserDto
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateUserDto'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/vehicle/delete/:
+    delete:
+      tags:
+        - vehicle-controller
+      summary: deleteVehicle
+      operationId: deleteVehicleUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: query
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /api/vehicle/getAll:
+    get:
+      tags:
+        - vehicle-controller
+      summary: getAll
+      operationId: getAllUsingGET_3
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Vehicle'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/vehicle/getVehicle/:
+    get:
+      tags:
+        - vehicle-controller
+      summary: getByDepartureAndDirections
+      operationId: getByDepartureAndDirectionsUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: departureCity
+          in: query
+          description: departureCity
+          required: true
+          type: string
+        - name: destinationCity
+          in: query
+          description: destinationCity
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Vehicle'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/vehicle/saveVehicle:
+    post:
+      tags:
+        - vehicle-controller
+      summary: saveVehicle
+      operationId: saveVehicleUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: vehicle
+          description: vehicle
+          required: true
+          schema:
+            $ref: '#/definitions/Vehicle'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/vehicle/update:
+    post:
+      tags:
+        - vehicle-controller
+      summary: updateVehicle
+      operationId: updateVehicleUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: query
+          description: id
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: vehicle
+          description: vehicle
+          required: true
+          schema:
+            $ref: '#/definitions/Vehicle'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+definitions:
+  BuyTicketDto:
+    type: object
+    properties:
+      busId:
+        type: string
+      seatId:
+        type: string
+      userEmail:
+        type: string
+    title: BuyTicketDto
+  GenericResponse:
+    type: object
+    properties:
+      message:
+        type: string
+    title: GenericResponse
+  LoginRequest:
+    type: object
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    title: LoginRequest
+  RegisterRequest:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+      username:
+        type: string
+    title: RegisterRequest
+  Route:
+    type: object
+    properties:
+      departureCity:
+        type: string
+      destinationCity:
+        type: string
+      id:
+        type: integer
+        format: int64
+      vehicles:
+        type: array
+        items:
+          $ref: '#/definitions/Vehicle'
+    title: Route
+  Ticket:
+    type: object
+    properties:
+      busDepartureTime:
+        type: string
+      fromDirection:
+        type: string
+      id:
+        type: string
+      status:
+        type: string
+        enum:
+          - TICKET_STATUS_CANCELED
+          - TICKET_STATUS_PURCHASED
+          - TICKET_STATUS_DELAYED
+          - TICKET_STATUS_REZERVATION
+          - TICKET_STATUS_FREE
+      ticketDate:
+        type: string
+      ticketNumber:
+        type: integer
+        format: int32
+      ticketPrice:
+        type: number
+        format: double
+      ticketSeat:
+        type: integer
+        format: int32
+      toDirection:
+        type: string
+      user:
+        $ref: '#/definitions/User'
+    title: Ticket
+  TicketDelayDto:
+    type: object
+    properties:
+      date:
+        type: string
+      ticketId:
+        type: string
+    title: TicketDelayDto
+  TokenResponseDto:
+    type: object
+    properties:
+      accessToken:
+        type: string
+      userDto:
+        $ref: '#/definitions/UserDto'
+    title: TokenResponseDto
+  UpdateUserDto:
+    type: object
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phoneNumber:
+        type: string
+    title: UpdateUserDto
+  User:
+    type: object
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      id:
+        type: integer
+        format: int64
+      lastName:
+        type: string
+      password:
+        type: string
+      phoneNumber:
+        type: string
+      role:
+        type: string
+        enum:
+          - USER
+          - ADMIN
+      username:
+        type: string
+    title: User
+  UserDto:
+    type: object
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+        format: int64
+      role:
+        type: string
+        enum:
+          - USER
+          - ADMIN
+      username:
+        type: string
+    title: UserDto
+  UserEmailDto:
+    type: object
+    properties:
+      email:
+        type: string
+      fromDirection:
+        type: string
+    title: UserEmailDto
+  UserListDto:
+    type: object
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      id:
+        type: integer
+        format: int64
+      lastName:
+        type: string
+      phoneNumber:
+        type: string
+      role:
+        type: string
+        enum:
+          - USER
+          - ADMIN
+      userName:
+        type: string
+    title: UserListDto
+  Vehicle:
+    type: object
+    properties:
+      capacity:
+        type: integer
+        format: int32
+      departureCity:
+        type: string
+      departureTime:
+        type: string
+      destinationCity:
+        type: string
+      id:
+        type: integer
+        format: int64
+      seatPrice:
+        type: number
+        format: double
+    title: Vehicle
